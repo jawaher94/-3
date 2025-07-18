@@ -1,0 +1,48 @@
+// מטלה 3 — אלגוריתמים חמדנים
+
+// שאלה 1: פריטת מטבעות (ודוגמה לכישלון
+
+‏import java.util.*;
+
+‏public class GreedyCoins {
+‏    static List<Integer> greedy(int[] coins, int amount) {
+‏        Arrays.sort(coins);  // מיון עולה
+‏        List<Integer> result = new ArrayList<>();
+‏        for (int i = coins.length - 1; i >= 0; i--) {
+‏            while (amount >= coins[i]) {
+‏                amount -= coins[i];
+‏                result.add(coins[i]);
+            }
+        }
+‏        return result;
+    }
+}
+
+
+
+// שאלה 2: שבירת טקסט לשורות לפי אורך L
+
+‏import java.util.*;
+
+‏public class TextWrapper {
+‏    static List<List<String>> wrap(List<String> words, int L) {
+‏        List<List<String>> lines = new ArrayList<>();
+‏        List<String> current = new ArrayList<>();
+‏        int length = 0;
+
+‏        for (String word : words) {
+‏            if (length + word.length() <= L) {
+‏                current.add(word);
+‏                length += word.length() + 1;
+‏            } else {
+‏                lines.add(new ArrayList<>(current));
+‏                current.clear();
+‏                current.add(word);
+‏                length = word.length() + 1;
+            }
+        }
+
+‏        if (!current.isEmpty()) lines.add(current);
+‏        return lines;
+    }
+}
